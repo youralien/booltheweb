@@ -55,7 +55,9 @@ exports.findById = function(req, res) {
 exports.addQuestion = function(req, res) {
     console.log('adding');
     var question = req.body;
+    console.log('adding2');
     question["poster"] = req.user._id;
+    console.log('adding3');
     question["timestamp"] = new Date().getTime();
     console.log(JSON.stringify(question));
     db.collection('questions', function(err, collection) {
