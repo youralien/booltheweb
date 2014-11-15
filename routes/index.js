@@ -57,17 +57,14 @@ module.exports = function(passport){
 		}
 	);
 
-	/* Handle Registration POST */
+	/* Handle Registration get */
 	router.get('/followup', function(req, res) {
-			res.render('followup',{message: req.flash('message')});
+			res.render('followup');
 		}
 	);
 
 	/* Handle Registration POST */
-	router.post('/followup',  
-		function(req, res) {
-			age = req.params('age');
-			console.log(age);
+	router.post('/followup', function(req, res) {
             res.send(req.user);
 		}
 	);
