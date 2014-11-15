@@ -15,6 +15,7 @@ app.get('/', function (req, res) {
 app.get('/questions', question.findAll);
 app.get('/questions/:id', question.findById);
 app.post('/questions', question.addQuestion);
+app.delete('/questions/:id', question.deleteQuestion);
 
 app.listen(3000);
 console.log('Listening on port 3000...');

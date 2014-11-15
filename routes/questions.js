@@ -55,6 +55,21 @@ exports.addQuestion = function(req, res) {
     });
 }
 
+exports.deleteQuestion = function(req, res) {
+    var id = req.params.id;
+    console.log('Deleting question: ' + id);
+    db.collection('questions', function(err, collection) {
+        collection.remove({'_id':new BSON.ObjectID(id)}, {safe:true}, function(err, result) {
+            if (err) {
+                res.send({'error':'An error has occurred - ' + err});
+            } else {
+                console.log('' + result + ' document(s) deleted');
+                res.send(req.body);
+            }
+        });
+    });
+}
+
 /*--------------------------------------------------------------------------------------------------------------------*/
 // Populate database with sample data -- Only used once: the first time the application is started.
 // You'd typically not find this code in a real-life app, since the database would already exist.
