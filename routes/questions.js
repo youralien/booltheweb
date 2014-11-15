@@ -73,11 +73,13 @@ exports.deleteQuestion = function(req, res) {
 
 exports.addVote = function(req, res) {
     var id = req.params.id;
+    var user = req.user;
     var answer = req.body;
+    var location = "answers."+user._id
     console.log("voting answer "+answer.answer+" for "+id);
-    /*db.collection('questions', function(err, collection) {
-        collection.
-    })*/
+    db.collection('questions', function(err, collection) {
+        collection.update({ '_id': new BSON.ObjectID(id) }, {$set:{location:answer.answer}});
+    })
     console.log(req.user);
 }
 
@@ -91,7 +93,7 @@ var populateDB = function() {
         question: "Like hackathons?",
         optionA: "yes",
         optionB: "no",
-        answers: {
+        answersA: {
             "user1":"yes",
             "user2":"no"
         }
