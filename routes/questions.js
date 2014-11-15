@@ -56,7 +56,11 @@ exports.addQuestion = function(req, res) {
     console.log('adding');
     var question = req.body;
     console.log('adding2');
-    question["poster"] = req.user._id;
+    try {
+        question["poster"] = req.user._id;
+    } catch {
+        console.log('is mobile, posts id by itself');
+    }
     console.log('adding3');
     question["timestamp"] = new Date().getTime();
     console.log(JSON.stringify(question));
