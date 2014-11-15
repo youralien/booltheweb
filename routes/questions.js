@@ -71,6 +71,16 @@ exports.deleteQuestion = function(req, res) {
     });
 }
 
+exports.addVote = function(req, res) {
+    var id = req.params.id;
+    var answer = req.body;
+    console.log("voting answer "+answer.answer+" for "+id);
+    /*db.collection('questions', function(err, collection) {
+        collection.
+    })*/
+    console.log(req.user);
+}
+
 /*--------------------------------------------------------------------------------------------------------------------*/
 // Populate database with sample data -- Only used once: the first time the application is started.
 // You'd typically not find this code in a real-life app, since the database would already exist.

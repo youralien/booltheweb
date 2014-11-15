@@ -53,6 +53,7 @@ module.exports = function(passport){
 
 	router.get('/questions', question.findAll);
 	router.get('/questions/:id', question.findById);
+	router.put('/questions/:id', question.addVote);
 	router.post('/questions', question.addQuestion);
 	router.delete('/questions/:id', question.deleteQuestion);
 
