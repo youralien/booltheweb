@@ -12,6 +12,7 @@ $(document).ready(function() {
 	function getData() {
 		$.getJSON( "/questions", function( data ) {
 			parseData(data);
+			putAnswer(data[0]._id, "A");
 		});
 	}
 
@@ -63,5 +64,28 @@ $(document).ready(function() {
                 lastName: lastName
 			}
 		);		
+	}
+
+	function putAnswer(id, aorb) {
+		$.ajax({
+			url: "/questions/"+id,
+			type: "PUT",
+			data: {answer:aorb}
+		});
+	}
+
+	function addQuestion(question, optionA, optionB) {
+		$.post( "/questions", {
+				question: question,
+				optionA: optionA,
+				optionB: optionB,
+				answersA: {},
+				answersB: {},
+			}
+		);
+	}
+
+	function deleteAll() {
+		$.get( "/deleteall");
 	}
 })
