@@ -11,7 +11,6 @@ db.open(function(err, db) {
     if(!err) {
         console.log("Connected to 'boolsdb' database");
         db.collection('questions', {strict:true}, function(err, collection) {
-
             if (err) {
                 console.log("The 'questions' collection doesn't exist. Creating it with sample data...");
                 populateDB();

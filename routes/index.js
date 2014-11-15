@@ -51,6 +51,12 @@ module.exports = function(passport){
 	});
 
 
+	/* GET Ask [Questions]*/
+	router.get('/ask', function(req, res) {
+		res.render('ask', {user:req.user});
+	});
+
+
 	router.get('/questions', question.findAll);
 	router.get('/questions/:id', question.findById);
 	router.post('/questions', question.addQuestion);
