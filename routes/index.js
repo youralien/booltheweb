@@ -57,6 +57,11 @@ module.exports = function(passport){
 		res.render('ask', {user:req.user});
 	});
 
+	/* POST Ask [Questions]*/
+	router.post('/ask', function(req, res) {
+		question.addQuestion(req, res)
+		res.redirect('/home');
+	});
 
 	router.get('/questions', question.findAll);
 	router.get('/questions/:id', question.findById);
