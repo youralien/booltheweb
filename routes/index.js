@@ -43,7 +43,7 @@ module.exports = function(passport){
 
 	/* Handle Registration POST */
 	router.post('/signup', passport.authenticate('signup', {
-		successRedirect: '/home',
+		successRedirect: '/followup',
 		failureRedirect: '/signup',
 		failureFlash : true  
 	}));
@@ -53,6 +53,21 @@ module.exports = function(passport){
 		passport.authenticate('signup'), 
 		function(req, res) {
 			console.log(req.user);
+            res.send(req.user);
+		}
+	);
+
+	/* Handle Registration POST */
+	router.get('/followup', function(req, res) {
+			res.render('followup',{message: req.flash('message')});
+		}
+	);
+
+	/* Handle Registration POST */
+	router.post('/followup',  
+		function(req, res) {
+			age = req.params('age');
+			console.log(age);
             res.send(req.user);
 		}
 	);

@@ -1,0 +1,29 @@
+extends layout
+
+block content
+	div.container
+		div.row
+			div.col-sm-6.col-md-4.col-md-offset-4
+				h1.text-center.login-title Registration Details
+					div.signup-wall
+						form(class='form-signin', action='/followup', method='POST')
+							h3 All the information on this page is optional. It will help our users analyze their results
+							input(type='text', name='age', class='form-control', placeholder='Age', autofocus)
+							input(type='text', name='gender', class='form-control nomargin', placeholder='Gender')
+							input(type='text', name='race', class='form-control', placeholder='Race')
+							input(type='text', name='city', class='form-control', placeholder='City')
+							input(type='text', name='state', class='form-control', placeholder='State')
+							input(type='text', name='occupation', class='form-control', placeholder='Occupation')
+							button(class='btn btn-lg btn-primary btn-block', type='submit') Continue
+							span.clearfix
+					#message
+						if message
+							h1.text-center.error-message #{message}
+
+
+	age: int,
+	gender: String,
+	race: String,
+	city: String,
+	state: String,
+	occupation: String
