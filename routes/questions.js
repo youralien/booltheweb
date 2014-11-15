@@ -1,4 +1,4 @@
-var resultsLimit = 1;
+var resultsLimit = 20;
 
 var mongo = require('mongodb');
  
@@ -53,6 +53,7 @@ exports.findById = function(req, res) {
 };
 
 exports.addQuestion = function(req, res) {
+    console.log('adding');
     var question = req.body;
     question["poster"] = req.user._id;
     question["timestamp"] = new Date().getTime();
