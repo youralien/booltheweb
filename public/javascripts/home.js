@@ -2,21 +2,9 @@ $(document).ready(function() {
 	getData();
 
 	function getData() {
-		url = "http:something";
-		data = [{
-			question:"question",
-			option1:"option1",
-			option2:"option2"
-		},{
-			question:"question",
-			option1:"option1",
-			option2:"option2"
-		},{
-			question:"question",
-			option1:"option1",
-			option2:"option2"
-		}]
-		parseData(data);
+		$.getJSON( "/questions", function( data ) {
+			parseData(data);
+		});
 	}
 
 	function parseData(data) {
