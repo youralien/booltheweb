@@ -1,6 +1,10 @@
 $(document).ready(function() {
 	var lastEntry;
 
+	testMobileSignup('runnersaw', 'ranger13', 'Sawyer', 'Vaughan', 'sawyer.vaughan@students.olin.edu');
+	testMobileSignup('runnersaw4', 'ranger13', 'Sawyer', 'Vaughan', 'sawyer.vaughan@students.olin.edu');
+
+
 	getData();
 	//addQuestion("Does JWei have swag?", "Yes", "No");
 	//deleteAll();
@@ -46,6 +50,17 @@ $(document).ready(function() {
 		$.post( "/mobilelogin", {
 				username: username,
 				password: password
+			}
+		);		
+	}
+
+	function testMobileSignup(username, password, firstName, lastName, email) {
+		$.post( "/mobilesignup", {
+				username: username,
+				password: password,
+                email: email,
+                firstName: firstName,
+                lastName: lastName
 			}
 		);		
 	}

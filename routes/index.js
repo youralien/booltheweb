@@ -32,7 +32,6 @@ module.exports = function(passport){
 		function(req, res) { 
 			// If this function gets called, authentication was successful.
 			// `req.user` contains the authenticated user.
-			console.log(req.user);
             res.send(req.user);
 		}
 	);
@@ -48,6 +47,15 @@ module.exports = function(passport){
 		failureRedirect: '/signup',
 		failureFlash : true  
 	}));
+
+	/* Handle Registration POST */
+	router.post('/mobilesignup', 
+		passport.authenticate('signup'), 
+		function(req, res) {
+			console.log(req.user);
+            res.send(req.user);
+		}
+	);
 
 	/* GET Home Page */
 	router.get('/home', isAuthenticated, function(req, res){
