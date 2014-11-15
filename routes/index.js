@@ -27,6 +27,15 @@ module.exports = function(passport){
 		failureFlash : true  
 	}));
 
+	router.post('/mobilelogin',
+		passport.authenticate('login'),
+		function(req, res) { 
+			// If this function gets called, authentication was successful.
+			// `req.user` contains the authenticated user.
+            res.send(req.user);
+		}
+	);
+
 	/* GET Registration Page */
 	router.get('/signup', function(req, res){
 		res.render('register',{message: req.flash('message')});
@@ -39,6 +48,15 @@ module.exports = function(passport){
 		failureFlash : true  
 	}));
 
+	/* Handle Registration POST */
+	router.post('/mobilesignup', 
+		passport.authenticate('signup'), 
+		function(req, res) {
+			console.log(req.user);
+            res.send(req.user);
+		}
+	);
+
 	/* GET Home Page */
 	router.get('/home', isAuthenticated, function(req, res){
 		res.render('home', { user: req.user });
@@ -49,8 +67,6 @@ module.exports = function(passport){
 		req.logout();
 		res.redirect('/');
 	});
-
-	//router.get('/deleteall', question.deleteAll);
 
 	/* GET Ask [Questions]*/
 	router.get('/ask', function(req, res) {
@@ -63,7 +79,10 @@ module.exports = function(passport){
 		res.redirect('/home');
 	});
 
+	router.get('/deleteall', question.deleteAll);
+
 	router.get('/questions', question.findAll);
+	router.get('/questions/last/:time', question.findAllFromTime);
 	router.get('/questions/:id', question.findById);
 	router.put('/questions/:id', question.addAnswer);
 	router.post('/questions', question.addQuestion);

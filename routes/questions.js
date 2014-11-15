@@ -1,3 +1,5 @@
+var resultsLimit = 20;
+
 var mongo = require('mongodb');
  
 var Server = mongo.Server,
@@ -24,7 +26,16 @@ RESTFUL API HEREEE
 */
 exports.findAll = function(req, res) {
     db.collection('questions', function(err, collection) {
-        collection.find().toArray(function(err, items) {
+        collection.find().sort( { timestamp : -1 } ).limit(resultsLimit).toArray(function(err, items) {
+            res.send(items);
+        });
+    });
+};
+
+exports.findAllFromTime = function(req, res) {
+    var timestamp = req.params.time;
+    db.collection('questions', function(err, collection) {
+        collection.find({ timestamp: { $lt: parseInt(timestamp) }}).sort({ timestamp : -1 }).limit(resultsLimit).toArray(function(err, items) {
             res.send(items);
         });
     });
@@ -43,6 +54,12 @@ exports.findById = function(req, res) {
 exports.addQuestion = function(req, res) {
     var question = req.body;
     question["poster"] = req.user._id;
+    try {
+        question["poster"] = req.user._id;
+    } catch(err) {
+        console.log('is mobile, posts id by itself');
+    }
+    question["timestamp"] = new Date().getTime();
     console.log(JSON.stringify(question));
     db.collection('questions', function(err, collection) {
         collection.insert(question, {safe:true}, function(err, result) {
@@ -73,13 +90,17 @@ exports.deleteQuestion = function(req, res) {
 
 exports.addAnswer = function(req, res) {
     var id = req.params.id;
-    var user = req.user;
-    var answer = req.body;
+    try {
+        var userid = req.user._id;
+    } catch(err) {
+        var userid = req.body.userid; // for mobile
+    }
+    var answer = req.body.answer;
     db.collection('questions', function(err, collection) {
-        if (answer.answer=="A") {
-            collection.update({ '_id': new BSON.ObjectID(id) }, {$push:{answersA:user._id}});
+        if (answer=="A") {
+            collection.update({ '_id': new BSON.ObjectID(id) }, {$push:{answersA:userid}});
         } else {
-            collection.update({ '_id': new BSON.ObjectID(id) }, {$push:{answersB:user._id}});
+            collection.update({ '_id': new BSON.ObjectID(id) }, {$push:{answersB:userid}});
         }
     });
 }
@@ -88,6 +109,7 @@ exports.deleteAll = function(req, res) {
     db.collection('questions', function(err, collection) {
         collection.remove({});
     });
+    populateDB();
 }
 
 /*--------------------------------------------------------------------------------------------------------------------*/
@@ -108,7 +130,8 @@ var populateDB = function() {
             "user3",
             "user5"
         ], 
-        poster: "user4"
+        poster: "user4", 
+        timestamp: new Date().getTime()
     },
     {
         question: "Cookies or ice cream?",
@@ -122,7 +145,8 @@ var populateDB = function() {
             "user3",
             "user5"
         ], 
-        poster: "user4"
+        poster: "user4",
+        timestamp: new Date().getTime()
     }];
  
     db.collection('questions', function(err, collection) {
