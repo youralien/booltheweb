@@ -43,7 +43,8 @@ exports.findById = function(req, res) {
 
 exports.addQuestion = function(req, res) {
     var question = req.body;
-    console.log('Adding question: ' + JSON.stringify(question));
+    question["poster"] = req.user._id;
+    console.log(JSON.stringify(question));
     db.collection('questions', function(err, collection) {
         collection.insert(question, {safe:true}, function(err, result) {
             if (err) {
@@ -71,16 +72,23 @@ exports.deleteQuestion = function(req, res) {
     });
 }
 
-exports.addVote = function(req, res) {
+exports.addAnswer = function(req, res) {
     var id = req.params.id;
     var user = req.user;
     var answer = req.body;
-    var location = "answers."+user._id
-    console.log("voting answer "+answer.answer+" for "+id);
     db.collection('questions', function(err, collection) {
-        collection.update({ '_id': new BSON.ObjectID(id) }, {$set:{location:answer.answer}});
-    })
-    console.log(req.user);
+        if (answer.answer=="A") {
+            collection.update({ '_id': new BSON.ObjectID(id) }, {$push:{answersA:user._id}});
+        } else {
+            collection.update({ '_id': new BSON.ObjectID(id) }, {$push:{answersB:user._id}});
+        }
+    });
+}
+
+exports.deleteAll = function(req, res) {
+    db.collection('questions', function(err, collection) {
+        collection.remove({});
+    });
 }
 
 /*--------------------------------------------------------------------------------------------------------------------*/
@@ -93,16 +101,29 @@ var populateDB = function() {
         question: "Like hackathons?",
         optionA: "yes",
         optionB: "no",
-        answersA: {
-            "user1":"yes",
-            "user2":"no"
-        }
+        answersA: [
+            "user1",
+            "user2"
+        ], 
+        answersB: [
+            "user3",
+            "user5"
+        ], 
+        poster: "user4"
     },
     {
         question: "Cookies or ice cream?",
         optionA: "cookies",
         optionB: "ice cream",
-        answers: {"user1":"cookies"}
+        answersA: [
+            "user1",
+            "user2"
+        ], 
+        answersB: [
+            "user3",
+            "user5"
+        ], 
+        poster: "user4"
     }];
  
     db.collection('questions', function(err, collection) {

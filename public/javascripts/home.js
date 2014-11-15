@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	getData();
+	//addQuestion("Does JWei have swag?", "Yes", "No");
 
 	function getData() {
 		$.getJSON( "/questions", function( data ) {
@@ -27,9 +28,13 @@ $(document).ready(function() {
 				question: question,
 				optionA: optionA,
 				optionB: optionB,
-				answers: {}
+				answersA: {},
+				answersB: {},
 			}
 		);
-		
+	}
+
+	function deleteAll() {
+		$.get( "/deleteall");
 	}
 })
