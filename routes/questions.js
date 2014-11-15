@@ -89,6 +89,7 @@ exports.deleteAll = function(req, res) {
     db.collection('questions', function(err, collection) {
         collection.remove({});
     });
+    populateDB();
 }
 
 /*--------------------------------------------------------------------------------------------------------------------*/
