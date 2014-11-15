@@ -77,16 +77,19 @@ var populateDB = function() {
  
     var questions = [
     {
-        question: "0 or 1",
-        optionA: "0",
-        optionB: "1",
-        answers: {"user1":"0"}
+        question: "Like hackathons?",
+        optionA: "yes",
+        optionB: "no",
+        answers: {
+            "user1":"yes",
+            "user2":"no"
+        }
     },
     {
-        question: "Apples or Bananas",
-        optionA: "apple",
-        optionB: "banana",
-        answers: {"user1":"apple"}
+        question: "Cookies or ice cream?",
+        optionA: "cookies",
+        optionB: "ice cream",
+        answers: {"user1":"cookies"}
     }];
  
     db.collection('questions', function(err, collection) {
