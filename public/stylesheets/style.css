@@ -85,12 +85,13 @@ h1.error-message{
 ul.user-details{
     list-style: none;
 }
-.navigationbar {
-    position: fixed;
-    width: 100vw;
-    height: 50px;
-    top:0;
-    background-color: blue;
+.navbar-brand
+{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    margin: auto;
 }
 #question-container {
     margin-left: 25vw;
