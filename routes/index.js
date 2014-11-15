@@ -50,7 +50,7 @@ module.exports = function(passport){
 		res.redirect('/');
 	});
 
-	//router.get('/deleteall', question.deleteAll);
+	router.get('/deleteall', question.deleteAll);
 
 	router.get('/questions', question.findAll);
 	router.get('/questions/:id', question.findById);
