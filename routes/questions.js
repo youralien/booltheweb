@@ -58,7 +58,7 @@ exports.addQuestion = function(req, res) {
     console.log('adding2');
     try {
         question["poster"] = req.user._id;
-    } catch {
+    } catch(err) {
         console.log('is mobile, posts id by itself');
     }
     console.log('adding3');
