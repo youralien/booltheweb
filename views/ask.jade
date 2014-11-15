@@ -1,7 +1,7 @@
 extends layout
 
 block content
-    script(src='/javascripts/home.js')
+    script(src='/javascripts/ask.js')
     nav.navbar.navbar-default(role='navigation')
       div.navbar-header
         button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
@@ -20,4 +20,4 @@ block content
             a(href='#about')#username #{user.firstName}
           li
             a(href='/signout') Logout 
-    div#question-container
+    div#ask-container
