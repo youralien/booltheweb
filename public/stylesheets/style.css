@@ -1,5 +1,4 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -86,14 +85,20 @@ h1.error-message{
 ul.user-details{
     list-style: none;
 }
-.navbar {
+.navigationbar {
+    position: fixed;
     width: 100vw;
-    height: 5vh;
+    height: 50px;
+    top:0;
     background-color: blue;
 }
 #question-container {
     margin-left: 25vw;
+    margin-top: 50px;
     width: 50vw;
-    height: 95vh;
     background-color: red;
+}
+.question {
+    position: relative;
+    width: 100%;
 }

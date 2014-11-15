@@ -11,7 +11,7 @@ $(document).ready(function() {
 		console.log(data);
 		for (i=0;i<data.length;i++) {
 			console.log(data.question);
-			$("#question-container").append(data[i].question);
+			$("#question-container").append("<div id='question'>"+data[i].question+"</div>");
 		}
 	}
 })
