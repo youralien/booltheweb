@@ -1,13 +1,9 @@
 $(document).ready(function() {
 	var lastEntry;
 
-	testMobileSignup('runnersaw', 'ranger13', 'Sawyer', 'Vaughan', 'sawyer.vaughan@students.olin.edu');
-	testMobileSignup('runnersaw4', 'ranger13', 'Sawyer', 'Vaughan', 'sawyer.vaughan@students.olin.edu');
-
-
 	getData();
 	//addQuestion("Does JWei have swag?", "Yes", "No");
-	deleteAll();
+	//deleteAll();
 
 	function getData() {
 		$.getJSON( "/questions", function( data ) {
@@ -47,19 +43,18 @@ $(document).ready(function() {
 		$.get( "/deleteall");
 	}
 
-	function testMobileLogin(username, password) {
+	function testMobileLogin(email, password) {
 		$.post( "/mobilelogin", {
-				username: username,
+				email: email,
 				password: password
 			}
 		);		
 	}
 
-	function testMobileSignup(username, password, firstName, lastName, email) {
+	function testMobileSignup(email, password, firstName, lastName) {
 		$.post( "/mobilesignup", {
-				username: username,
-				password: password,
                 email: email,
+				password: password,
                 firstName: firstName,
                 lastName: lastName
 			}
