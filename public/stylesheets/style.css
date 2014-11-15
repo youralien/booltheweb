@@ -103,3 +103,7 @@ ul.user-details{
     position: relative;
     width: 100%;
 }
+.buttonHolder{ text-align: center; }
+.ask-form{
+    padding: 10%;
+}
