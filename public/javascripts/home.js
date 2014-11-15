@@ -7,7 +7,7 @@ $(document).ready(function() {
 
 	getData();
 	//addQuestion("Does JWei have swag?", "Yes", "No");
-	//deleteAll();
+	deleteAll();
 
 	function getData() {
 		$.getJSON( "/questions", function( data ) {
