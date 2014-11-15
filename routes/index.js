@@ -81,6 +81,17 @@ module.exports = function(passport){
 
 	router.get('/deleteall', question.deleteAll);
 
+	/* GET Ask [Questions]*/
+	router.get('/ask', function(req, res) {
+		res.render('ask', {user:req.user});
+	});
+
+	/* POST Ask [Questions]*/
+	router.post('/ask', function(req, res) {
+		question.addQuestion(req, res)
+		res.redirect('/home');
+	});
+
 	router.get('/questions', question.findAll);
 	router.get('/questions/last/:time', question.findAllFromTime);
 	router.get('/questions/:id', question.findById);
