@@ -4,13 +4,14 @@ var Server = mongo.Server,
     Db = mongo.Db,
     BSON = mongo.BSONPure;
  
-var server = new Server('localhost', 27017, {auto_reconnect: true});
+var server = new Server('104.131.46.241', 27017, {auto_reconnect: true});
 db = new Db('boolsdb', server);
  
 db.open(function(err, db) {
     if(!err) {
         console.log("Connected to 'boolsdb' database");
         db.collection('questions', {strict:true}, function(err, collection) {
+
             if (err) {
                 console.log("The 'questions' collection doesn't exist. Creating it with sample data...");
                 populateDB();
