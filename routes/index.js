@@ -27,6 +27,16 @@ module.exports = function(passport){
 		failureFlash : true  
 	}));
 
+	router.post('/mobilelogin',
+		passport.authenticate('login'),
+		function(req, res) { 
+			// If this function gets called, authentication was successful.
+			// `req.user` contains the authenticated user.
+			console.log(req.user);
+            res.send(req.user);
+		}
+	);
+
 	/* GET Registration Page */
 	router.get('/signup', function(req, res){
 		res.render('register',{message: req.flash('message')});
@@ -53,6 +63,7 @@ module.exports = function(passport){
 	router.get('/deleteall', question.deleteAll);
 
 	router.get('/questions', question.findAll);
+	router.get('/questions/last/:time', question.findAllFromTime);
 	router.get('/questions/:id', question.findById);
 	router.put('/questions/:id', question.addAnswer);
 	router.post('/questions', question.addQuestion);

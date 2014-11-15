@@ -1,3 +1,5 @@
+var resultsLimit = 1;
+
 var mongo = require('mongodb');
  
 var Server = mongo.Server,
@@ -25,7 +27,16 @@ RESTFUL API HEREEE
 */
 exports.findAll = function(req, res) {
     db.collection('questions', function(err, collection) {
-        collection.find().toArray(function(err, items) {
+        collection.find().sort( { timestamp : -1 } ).limit(resultsLimit).toArray(function(err, items) {
+            res.send(items);
+        });
+    });
+};
+
+exports.findAllFromTime = function(req, res) {
+    var timestamp = req.params.time;
+    db.collection('questions', function(err, collection) {
+        collection.find({ timestamp: { $lt: parseInt(timestamp) }}).sort({ timestamp : -1 }).limit(resultsLimit).toArray(function(err, items) {
             res.send(items);
         });
     });
@@ -44,6 +55,7 @@ exports.findById = function(req, res) {
 exports.addQuestion = function(req, res) {
     var question = req.body;
     question["poster"] = req.user._id;
+    question["timestamp"] = new Date().getTime();
     console.log(JSON.stringify(question));
     db.collection('questions', function(err, collection) {
         collection.insert(question, {safe:true}, function(err, result) {
@@ -110,7 +122,8 @@ var populateDB = function() {
             "user3",
             "user5"
         ], 
-        poster: "user4"
+        poster: "user4", 
+        timestamp: new Date().getTime()
     },
     {
         question: "Cookies or ice cream?",
@@ -124,7 +137,8 @@ var populateDB = function() {
             "user3",
             "user5"
         ], 
-        poster: "user4"
+        poster: "user4",
+        timestamp: new Date().getTime()
     }];
  
     db.collection('questions', function(err, collection) {

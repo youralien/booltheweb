@@ -1,4 +1,6 @@
 $(document).ready(function() {
+	var lastEntry;
+
 	getData();
 	//addQuestion("Does JWei have swag?", "Yes", "No");
 	//deleteAll();
@@ -6,7 +8,6 @@ $(document).ready(function() {
 	function getData() {
 		$.getJSON( "/questions", function( data ) {
 			parseData(data);
-			putAnswer(data[0]._id, "A");
 		});
 	}
 
@@ -14,6 +15,8 @@ $(document).ready(function() {
 		for (i=0;i<data.length;i++) {
 			$("#question-container").append("<div id='question'>"+data[i].question+"</div>");
 		}
+		lastEntry=data[data.length-1];
+		console.log(lastEntry);
 	}
 
 	function putAnswer(id, aorb) {
@@ -37,5 +40,13 @@ $(document).ready(function() {
 
 	function deleteAll() {
 		$.get( "/deleteall");
+	}
+
+	function testMobileLogin(username, password) {
+		$.post( "/mobilelogin", {
+				username: username,
+				password: password
+			}
+		);		
 	}
 })
