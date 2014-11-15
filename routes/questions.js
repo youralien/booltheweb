@@ -102,8 +102,10 @@ exports.addAnswer = function(req, res) {
     console.log(answer);
     db.collection('questions', function(err, collection) {
         if (answer=="A") {
+            console.log('a');
             collection.update({ '_id': new BSON.ObjectID(id) }, {$push:{answersA:userid}});
         } else {
+            console.log('b');
             collection.update({ '_id': new BSON.ObjectID(id) }, {$push:{answersB:userid}});
         }
     });
