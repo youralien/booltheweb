@@ -13,7 +13,6 @@ db.open(function(err, db) {
     if(!err) {
         console.log("Connected to 'boolsdb' database");
         db.collection('questions', {strict:true}, function(err, collection) {
-
             if (err) {
                 console.log("The 'questions' collection doesn't exist. Creating it with sample data...");
                 populateDB();
@@ -54,6 +53,7 @@ exports.findById = function(req, res) {
 
 exports.addQuestion = function(req, res) {
     var question = req.body;
+    question["poster"] = req.user._id;
     try {
         question["poster"] = req.user._id;
     } catch(err) {
