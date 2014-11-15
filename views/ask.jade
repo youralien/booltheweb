@@ -20,22 +20,6 @@ block content
             a(href='#about')#username #{user.firstName}
           li
             a(href='/signout') Logout 
-    //- form.form-horizontal
-    //-   fieldset.ask-form
-    //-     .form-group
-    //-       label.control-label(for='inputLarge') Ask
-    //-       input#inputLarge.form-control.input-lg(type='text')
-    //-     .row
-    //-       .col-xs-6
-    //-         .form-group.has-success
-    //-           label.control-label(for='inputSuccess') option A
-    //-           input#inputSuccess.form-control(type='text')
-    //-       .col-xs-6
-    //-         .form-group.has-error
-    //-           label.control-label(for='inputError') option B
-    //-           input#inputError.form-control(type='text')
-    //-     .form-group.buttonHolder
-    //-       button.btn.btn-primary(type='submit') Submit
 
     form.form-horizontal.ask-form(method='post', action='/ask')
       fieldset
