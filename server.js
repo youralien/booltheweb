@@ -6,6 +6,7 @@ var app = express();
 app.configure(function () {
     app.use(express.logger('dev'));     /* 'default', 'short', 'tiny', 'dev' */
     app.use(express.bodyParser());
+    app.set('trust proxy', 'loopback', '0.0.0.0');
 });
 
 app.get('/', function (req, res) {
