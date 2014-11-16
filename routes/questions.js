@@ -67,6 +67,7 @@ exports.addQuestion = function(req, res) {
         question["poster"] = req.user._id;
     } catch(err) {
         console.log('is mobile, posts id by itself');
+        question["poster"] = new BSON.ObjectID(question["poster"]);
     }
     question["timestamp"] = new Date().getTime();
     question["answersA"] = [];
