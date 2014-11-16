@@ -4,6 +4,7 @@ $(document).ready(function() {
 	getData();
 	//addQuestion("Does JWei have swag?", "Yes", "No");
 	//deleteAll();
+	testMobileLogin("sawyer.vaughan@students.olin.edu", "radfsaer");
 
 	function getData() {
 		$.getJSON( "/questions", function( data ) {
