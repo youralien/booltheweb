@@ -97,9 +97,9 @@ ul.user-details{
     margin: auto;
 }
 #question-container {
-    margin-left: 25vw;
+    margin-left: 15vw;
     margin-top: 50px;
-    width: 50vw;
+    width: 70vw;
     height: 70vh;
 }
 .question {
@@ -112,12 +112,15 @@ ul.user-details{
     border: 2px solid black;
     border-radius: 10px;
     display: none;
+    padding: 10%;
+    font-size: 2em;
 }
 .option-a {
   width: 50%;
   position: absolute;
   left: 0;
   height: 20%;
+  padding: 5%;
   bottom: 0;
   border-top: 1px solid black;
   border-right: 1px solid black;
@@ -127,6 +130,7 @@ ul.user-details{
   position: absolute;
   right: 0;
   height: 20%;
+  padding: 5%;
   bottom: 0;
   border-top: 1px solid black;
   border-left: 1px solid black;

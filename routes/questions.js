@@ -54,7 +54,7 @@ exports.findById = function(req, res) {
 exports.findQuestionsByUser = function(req, res) {
     var id = req.params.userid;
     db.collection('questions', function(err, collection) {
-        collection.find({'poster':new BSON.ObjectID(id)}).toArray(function(err, items) {
+        collection.find({'poster':id}).toArray(function(err, items) {
             res.send(items);
         });
     });
