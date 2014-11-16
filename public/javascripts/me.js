@@ -35,9 +35,12 @@ $(document).ready(function() {
 	}
 
 	function getQuestionData(questionid) {
+		console.log("get question info");
 		$.get('/questions/'+questionid, function(data) {
-			for (i=0;i<data.answersB.length;i++) {
-				getUser(data.answersB[i]);
+			console.log("get question info");
+			for (i=0;i<data.answersA.length;i++) {
+				console.log("get question info");
+				getUser(data.answersA[i]);
 			}
 			$("#selection-bar").html("");
 			displaySelectors(data);

@@ -25,23 +25,9 @@ db.open(function(err, db) {
 RESTFUL API HEREEE
 */
 exports.findAll = function(req, res) {
-    id = String(req.user._id);
     db.collection('questions', function(err, collection) {
-            collection.find({poster:{$ne:id}}).sort( { timestamp : -1 } ).limit(resultsLimit).toArray(function(err, items) {
-                outputItems = []
-                for (i=0;i<items.length;i++) {
-                    add = true;
-                    if (items[i].answersA.indexOf(String(id)) > -1) {
-                        add = false;
-                    }
-                    if (items[i].answersB.indexOf(String(id)) > -1) {
-                        add = false;
-                    }
-                    if (add) {
-                        outputItems.push(items[i]);
-                    }
-                }
-                res.send(outputItems);
+            collection.find().sort( { timestamp : -1 } ).limit(resultsLimit).toArray(function(err, items) {
+                res.send(items);
             });
     });
 };
