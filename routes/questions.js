@@ -25,7 +25,6 @@ db.open(function(err, db) {
 RESTFUL API HEREEE
 */
 exports.findAll = function(req, res) {
-    id = String(req.user._id);
     db.collection('questions', function(err, collection) {
             collection.find({poster:{$ne:id}}).sort( { timestamp : -1 } ).limit(resultsLimit).toArray(function(err, items) {
                 outputItems = []
