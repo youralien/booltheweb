@@ -65,7 +65,7 @@ $(document).ready(function() {
 		var d = {}
 		for (i=0;i<data.length;i++) {
 			temp = data[i];
-			temp2 = temp[selector]);
+			temp2 = temp[selector];
 			if (temp2 in d) {
 				d[temp2] += 1;
 			} else {
