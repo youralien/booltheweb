@@ -22,13 +22,4 @@ block content
         li
           a(href='/signout') Logout 
 
-    //- div#question-container
-  ion-pane(ng-controller='CardsCtrl')
-    td-cards
-      td-card(ng-repeat='card in cards',on-destroy='cardDestroyed($index)',on-swipe-left='cardSwipedLeft($index)',on-swipe-right='cardSwipedRight($index)',on-partial-swipe='cardPartialSwipe(amt)',ng-controller='CardCtrl').card-{{card.index}}
-        .list-group-item
-          .row-content
-            h4.list-group-item-heading {{card.question}}
-            p.list-group-item-text {{card.optionA}} or {{card.optionB}}
-          .yes-text(ng-style='leftTextOpacity') LIKE
-          .no-text(ng-style='rightTextOpacity') NOPE
+    div#question-container
