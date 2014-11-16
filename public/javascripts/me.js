@@ -65,7 +65,7 @@ $(document).ready(function() {
 		var d = {}
 		for (i=0;i<data.length;i++) {
 			temp = data[i];
-			console.log(temp[selector]);
+			console.log(temp);
 		}
 		console.log(d);
 	    $('#data-container').highcharts({
