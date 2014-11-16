@@ -52,7 +52,6 @@ $(document).ready(function() {
 	    }
 	    if (e.keyCode == '39') {
 	        // right arrow
-	        console.log("darn");
 			$("#question-container").children().first().removeClass('selected');
 			$("#question-container").children().first().animate({
 				left: "100vw"
@@ -66,6 +65,86 @@ $(document).ready(function() {
 	    else if (e.keyCode == '40') {
 	        // down arrow
 	    }
+	}
+
+	var pageWidth = $(window).width();
+	var pageHeight = $(window).height();
+
+	document.addEventListener('touchstart', handleTouchDown)
+
+	document.addEventListener('touchmove', handleTouchMove)
+
+	function handleTouchDown(e) {
+		e.preventDefault()
+		var touch = e.touches[0]; 
+		startX = touch.clientX;
+		startY = touch.clientY;
+	}
+
+	function handleTouchMove(e) {
+		e.preventDefault()
+		if ( !startX || !startY ) {
+			return;
+		}
+		var touch = e.touches[0]; 
+		endX = touch.clientX;
+		endY = touch.clientY;
+		swipeDirection = findDirection(startX, startY, endX, endY);
+		if (swipeDirection != null) {
+			startX = null;
+			startY = null;
+		}		
+	}
+
+	function findDirection(startX, startY, endX, endY) {
+		swipeDirection = null;
+		xChange = endX-startX
+		yChange = endY-startY
+		if (Math.abs(xChange) > Math.abs(yChange)) {
+			if (Math.abs(xChange)>=pageWidth/5.0) {
+				if (xChange>0) {
+					$("#question-container").children().first().removeClass('selected');
+					$("#question-container").children().first().animate({
+						left: "100vw"
+					}, 200, function() {
+						var id = $('#question-container').children().first().attr('id');
+						putAnswer(id, "B");
+						$("#question-container").children().first().remove();
+						showNextQuestion();
+					});
+					swipeDirection = 'right';
+				} else {
+					$("#question-container").children().first().removeClass('selected');
+					$("#question-container").children().first().animate({
+						left: "-100vw"
+					}, 200, function() {
+						var id = $('#question-container').children().first().attr('id');
+						putAnswer(id, "A");
+						$("#question-container").children().first().remove();
+						showNextQuestion();				
+					});
+					swipeDirection = 'left';
+				}
+			}
+		} else if (Math.abs(xChange) < Math.abs(yChange)) {
+			if (Math.abs(yChange)>=pageWidth/5.0) {
+				if (yChange>0) {
+					swipeDirection = 'down';
+				} else {
+					$("#question-container").children().first().removeClass('selected');
+					$("#question-container").children().first().animate({
+						left: "100vw"
+					}, 200, function() {
+						var id = $('#question-container').children().first().attr('id');
+						putAnswer(id, "B");
+						$("#question-container").children().first().remove();
+						showNextQuestion();
+					});
+					swipeDirection = 'up';
+				}
+			}
+		}
+		return swipeDirection;
 	}
 
 	function getNextData() {
