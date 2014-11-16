@@ -62,7 +62,7 @@ exports.findQuestionsByUser = function(req, res) {
 
 exports.addQuestion = function(req, res) {
     var question = req.body;
-    question["poster"] = req.user._id;
+    console.log(question);
     try {
         question["poster"] = req.user._id;
     } catch(err) {
