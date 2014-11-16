@@ -26,19 +26,20 @@ block content
         legend Ask a question... Investigate a Market.. Understand others
         .form-group
           label.control-label(for='inputLarge') Ask
-          input#inputLarge.form-control.input-lg(name='question', type='text')
+          input#inputLarge.form-control.input-lg(name='question', pattern=".{5,200}", required, type='text')
         .row
           .col-xs-6
             .form-group.has-success
               label.control-label(for='inputSuccess') option A
-              input#inputSuccess.form-control(name='optionA', type='text')
+              input#inputSuccess.form-control(name='optionA', pattern=".{2,30}", required, type='text')
           .col-xs-6
             .form-group.has-error
               label.control-label(for='inputError') option B
-              input#inputError.form-control(name='optionB', type='text')
+              input#inputError.form-control(name='optionB', pattern=".{2,30}", required, type='text')
           .col-lg-10.col-lg-offset-2
-            button.btn.btn-default Cancel
             button.btn.btn-primary(type='submit') Submit
+    a(href='/home', target='_blank')
+      button.btn.btn-default Cancel
 
 
 

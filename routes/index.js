@@ -27,31 +27,27 @@ module.exports = function(passport){
 		failureFlash : true  
 	}));
 
-	router.post('/mobilelogin',
+	router.post('/mobilelogin', // this is the url where android users can get their credentials
 		function(req, res) { 
 			var bCrypt = require('bcrypt-nodejs');
-			var User = require('../models/user');
-			// If this function gets called, authentication was successful.
-			// `req.user` contains the authenticated user.
-            // check in mongo if a user with username exists or not
+			var User = require('../models/user'); 
+
             var email = req.body.email;
             var password = req.body.password;
-            console.log(email);
-            User.findOne({ 'email' :  email }, 
+            User.findOne({ 'email' :  email }, // find users with this email
                 function(err, user) {
-                    // In case of any error, return using the done method
+                    // In case of any error, return
                     if (err)
                         return done(err);
-                    // Username does not exist, log the error and redirect back
+                    // Username does not exist, tell app that this username is free to make an account
                     if (!user){
                         res.send({valid: true});
                         return;    
                     } else if (!isValidPassword(user, password)) {
-                        res.send({valid: false});  // redirect back to login page
+                        res.send({valid: false});  // this username is taken, but the password is wrong
                         return;
                     }
-                    // User and password both match, return user from done method
-                    // which will be treated like success
+                    // User and password both match, return user
                     res.send(user);
 				}
 			);
@@ -75,15 +71,14 @@ module.exports = function(passport){
 		failureFlash : true  
 	}));
 
-	/* Handle Registration POST */
+	/* Handle Registration POST for mobile */
 	router.post('/mobilesignup', 
 		function(req, res) {
+			console.log('yay');
 			var User = require('../models/user');
-			// If this function gets called, authentication was successful.
-			// `req.user` contains the authenticated user.
-            // check in mongo if a user with username exists or not
             var body = req.body;
             var newUser = new User();
+            console.log(body);
 
 			// set the user's local credentials
 			newUser.password = createHash(password);
