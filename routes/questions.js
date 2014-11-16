@@ -26,9 +26,9 @@ RESTFUL API HEREEE
 */
 exports.findAll = function(req, res) {
     db.collection('questions', function(err, collection) {
+            /*
         console.log(req.user._id);
         try {
-            /*
             collection.find().sort( { timestamp : -1 } ).limit(resultsLimit).toArray(function(err, items) {
                 console.log(items);
                 console.log(items.length);
@@ -45,10 +45,10 @@ exports.findAll = function(req, res) {
                 console.log(items);
                 console.log(items.length);
             });
-*/
         } catch(err) {
             console.log(err);
         }
+*/
     });
 };
 
