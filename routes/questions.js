@@ -26,9 +26,17 @@ RESTFUL API HEREEE
 */
 exports.findAll = function(req, res) {
     db.collection('questions', function(err, collection) {
-        collection.find().sort( { timestamp : -1 } ).limit(resultsLimit).toArray(function(err, items) {
-            res.send(items);
-        });
+        try {
+            collection.find({poster:{$ne:req.user._id}}).sort( { timestamp : -1 } ).limit(resultsLimit).toArray(function(err, items) {
+                console.log(items);
+                console.log(items.length);
+            });
+        } catch(err) {
+            collection.find().sort( { timestamp : -1 } ).limit(resultsLimit).toArray(function(err, items) {
+                console.log(items);
+                console.log(items.length);
+            });
+        }
     });
 };
 

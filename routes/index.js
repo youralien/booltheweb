@@ -134,7 +134,7 @@ module.exports = function(passport){
 			console.log(gender);
 			console.log(race);
 			*/
-            res.send(req.user);
+            res.redirect('/home')
 		}
 	);
 
