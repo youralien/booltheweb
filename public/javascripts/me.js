@@ -5,8 +5,9 @@ $(document).ready(function() {
 	var question_data;
 	var user_data = [];
 	var user_id = $("#user-id").text();
-
+	console.log(user_id);
 	getUserQuestions(user_id);
+	testGetUserQuestions();
 
 	function parseData(data) {
 		for (i=0;i<data.length;i++) {
@@ -15,6 +16,7 @@ $(document).ready(function() {
 		lastEntry=data[data.length-1];
 		$(".my-question").click(function() {
 			id=$(this).attr('id');
+			console.log(id);
 			getQuestionData(id);
 		});
 	}
@@ -38,6 +40,7 @@ $(document).ready(function() {
 	function getQuestionData(questionid) {
 		$.get('/questions/'+questionid, function(data) {
 			for (i=0;i<data.answersB.length;i++) {
+				console.log(i);
 				getUser(data.answersB[i]);
 			}
 			$("#selection-bar").html("");
@@ -116,5 +119,12 @@ $(document).ready(function() {
 	            data: l
 	        }]
 	    });
+	}
+
+	function testGetUserQuestions() {
+		$.get( "/questions/user/54670c66de802fa05f003992", function(data) {
+				console.log(data);
+			}
+		);	
 	}
 });
