@@ -5,6 +5,8 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
+
+// This is a lot of things that we just used because someone else had made
 angular.module('starter', ['ionic', 'ionic.contrib.ui.tinderCards'])
 
 
@@ -59,9 +61,11 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.tinderCards'])
 
 
 $(document).ready(function() {
-	var lastEntry;
+	var lastEntry; // used to get older entries when we've reached the limit of what we can get
 
-	getData();
+	getData(); // get data upon document load
+
+	// test functions:
 	//addQuestion("Does JWei have swag?", "Yes", "No");
 	//deleteAll();
 	testMobileLogin("sawyer.vaughan@students.olin.edu", "ranger");
