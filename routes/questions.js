@@ -26,16 +26,28 @@ RESTFUL API HEREEE
 */
 exports.findAll = function(req, res) {
     db.collection('questions', function(err, collection) {
+        console.log(req.user._id);
         try {
-            collection.find({poster:{$ne:req.user._id}}).sort( { timestamp : -1 } ).limit(resultsLimit).toArray(function(err, items) {
-                console.log(items);
-                console.log(items.length);
-            });
-        } catch(err) {
+            /*
             collection.find().sort( { timestamp : -1 } ).limit(resultsLimit).toArray(function(err, items) {
                 console.log(items);
                 console.log(items.length);
             });
+            collection.find({poster:{$ne:req.user._id}}).sort( { timestamp : -1 } ).limit(resultsLimit).toArray(function(err, items) {
+                console.log(items);
+                console.log(items.length);
+            });
+            collection.find({poster:{$ne:req.user._id}, answersA:{$elemMatch:req.user._id}}).sort( { timestamp : -1 } ).limit(resultsLimit).toArray(function(err, items) {
+                console.log(items);
+                console.log(items.length);
+            });
+            collection.find({poster:{$ne:req.user._id}, answersA:{$not:{$elemMatch:req.user._id}} , answersB:{$not:{$elemMatch:req.user._id}}}).sort( { timestamp : -1 } ).limit(resultsLimit).toArray(function(err, items) {
+                console.log(items);
+                console.log(items.length);
+            });
+*/
+        } catch(err) {
+            console.log(err);
         }
     });
 };
