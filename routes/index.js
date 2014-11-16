@@ -39,6 +39,7 @@ module.exports = function(passport){
             console.log(email);
             User.findOne({ 'email' :  email }, 
                 function(err, user) {
+                	console.log(user);
                     // In case of any error, return using the done method
                     if (err)
                         return done(err);
@@ -46,7 +47,6 @@ module.exports = function(passport){
                     if (!user){
                         res.send({valid: false});           
                     } else if (!isValidPassword(user, password)) {
-                        console.log('Invalid Password');
                         res.send({valid: false});  // redirect back to login page
                     }
                     // User and password both match, return user from done method
@@ -76,9 +76,31 @@ module.exports = function(passport){
 
 	/* Handle Registration POST */
 	router.post('/mobilesignup', 
-		passport.authenticate('signup'), 
 		function(req, res) {
-            res.send(req.user);
+			var bCrypt = require('bcrypt-nodejs');
+			var User = require('../models/user');
+			// If this function gets called, authentication was successful.
+			// `req.user` contains the authenticated user.
+            // check in mongo if a user with username exists or not
+            var body = req.body;
+            console.log(email);
+            User.findOne({ 'email' :  email }, 
+                function(err, user) {
+                    // In case of any error, return using the done method
+                    if (err) {
+                        res.send({valid: false});
+                    }
+                    // Username does not exist, log the error and redirect back
+                    if (user){
+                        res.send({valid: false});
+                    } else  {
+                        res.send({valid: false});  // redirect back to login page
+                    	res.send(req.user);
+                    }
+                    // User and password both match, return user from done method
+                    // which will be treated like success
+				}
+			);
 		}
 	);
 
