@@ -233,6 +233,16 @@ module.exports = function(passport){
 		);
 	});
 
+	router.get('/users', function(req, res) {
+		var User = require('../models/user');
+	    User.findOne({ firstName: "JJJJJ"}, // find users with this email
+            function(err, user) {
+                // In case of any error, return
+                res.send(user);
+			}
+		);
+	})
+
 	router.get('/deleteall', question.deleteAll);
 	router.get('/questions/user/:userid', question.findQuestionsByUser);
 	router.get('/questions', question.findAll);

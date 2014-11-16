@@ -6,11 +6,18 @@ $(document).ready(function() {
 	var user_data = [];
 	var user_id = $("#user-id").text();
 	console.log(user_id);
-	getUserQuestions(user_id);
-	//testGetUserQuestions();
+	//getUserQuestions(user_id);
+	testGetUserQuestions();
 
-	function getUserQuestions(id) {
-		$.get( "/questions/user/"+id, function(data) {
+	function getUserQuestions(user_id) {
+		$.get( "/questions/user/"+user_id, function(data) {
+				parseData(data);
+			}
+		);	
+	}
+
+	function testGetUserQuestions() {
+-		$.get( "/questions/user/54670c66de802fa05f003992", function(data) {
 				parseData(data);
 			}
 		);	
@@ -22,16 +29,14 @@ $(document).ready(function() {
 		}
 		lastEntry=data[data.length-1];
 		$(".my-question").click(function() {
-			id=$(this).attr('id');
-			console.log(id);
-			getQuestionData(id);
+			question_id=$(this).attr('id');
+			getQuestionData(question_id);
 		});
 	}
 
 	function getQuestionData(questionid) {
 		$.get('/questions/'+questionid, function(data) {
 			for (i=0;i<data.answersB.length;i++) {
-				console.log(i);
 				getUser(data.answersB[i]);
 			}
 			$("#selection-bar").html("");
@@ -39,8 +44,8 @@ $(document).ready(function() {
 		});
 	}
 
-	function getUser(id) {
-		$.get('/user/'+id, function(data) {
+	function getUser(user_id) {
+		$.get('/user/'+user_id, function(data) {
 				if (data) {
 					user_data.push(data);
 					console.log(data);
@@ -119,12 +124,5 @@ $(document).ready(function() {
 	            data: l
 	        }]
 	    });
-	}
-
-	function testGetUserQuestions() {
-		$.get( "/questions/user/54670c66de802fa05f003992", function(data) {
-				console.log(data);
-			}
-		);	
 	}
 });
