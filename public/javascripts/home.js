@@ -75,7 +75,7 @@ $(document).ready(function() {
 
 	function parseData(data) {
 		for (i=0;i<data.length;i++) {
-			$("#question-container").append("<div id='question'>"+data[i].question+"</div>");
+			$("#question-container").append("<div id='"+data[i]._id+"' class='question'>"+data[i].question+"</div>");
 		}
 		lastEntry=data[data.length-1];
 	}
