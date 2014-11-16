@@ -1,19 +1,15 @@
 doctype html
-html
+html(ng-app='starter')
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
     script(src='/javascripts/jquery.js')
+    //- script(src='/libs/boostrap-material-design/dist/material.min.js')
     script(src='/javascripts/draggable.js')
     script(src='/libs/boostrap-material-design/dist/material.min.js')
     meta(charset='utf-8')
     meta(name='viewport', content='initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width')
-    link(rel='stylesheet', href='http://code.ionicframework.com/contrib/ionic-contrib-tinder-cards/ionic.tdcards.css')
-    //- link(hrel='stylesheet', href='http://code.ionicframework.com/1.0.0-beta.13/css/ionic.css', rel='stylesheet')
-    script(src='http://code.ionicframework.com/collide/0.0.4/collide.js')
-    script(src='//code.ionicframework.com/1.0.0-beta.13/js/ionic.bundle.js')
-    script(src='http://code.ionicframework.com/contrib/ionic-contrib-tinder-cards/ionic.tdcards.js')
 
   body(no-scroll)
     block content
