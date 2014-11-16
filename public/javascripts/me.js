@@ -4,8 +4,9 @@ $(document).ready(function() {
 	var selector;
 	var question_data;
 	var user_data = [];
+	var user_id = $("#user-id").text();
 
-	testGetUserQuestions();
+	getUserQuestions(user_id);
 
 	function parseData(data) {
 		for (i=0;i<data.length;i++) {
@@ -27,8 +28,8 @@ $(document).ready(function() {
 		});
 	}
 
-	function testGetUserQuestions() {
-		$.get( "/questions/user/54670c66de802fa05f003992", function(data) {
+	function getUserQuestions(id) {
+		$.get( "/questions/user/"+id, function(data) {
 				parseData(data);
 			}
 		);	
