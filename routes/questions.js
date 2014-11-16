@@ -151,6 +151,7 @@ exports.addAnswer = function(req, res) {
             console.log('b');
             collection.update({ '_id': new BSON.ObjectID(id) }, {$push:{answersB:userid}});
         }
+        res.send();
     });
 }
 
