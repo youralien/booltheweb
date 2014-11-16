@@ -44,7 +44,7 @@ module.exports = function(passport){
                         return done(err);
                     // Username does not exist, log the error and redirect back
                     if (!user){
-                        res.send({valid: false});
+                        res.send({valid: true});
                         return;    
                     } else if (!isValidPassword(user, password)) {
                         res.send({valid: false});  // redirect back to login page
@@ -52,7 +52,6 @@ module.exports = function(passport){
                     }
                     // User and password both match, return user from done method
                     // which will be treated like success
-                    user['valid'] = true;
                     res.send(user);
 				}
 			);
@@ -79,32 +78,42 @@ module.exports = function(passport){
 	/* Handle Registration POST */
 	router.post('/mobilesignup', 
 		function(req, res) {
-			var bCrypt = require('bcrypt-nodejs');
 			var User = require('../models/user');
 			// If this function gets called, authentication was successful.
 			// `req.user` contains the authenticated user.
             // check in mongo if a user with username exists or not
             var body = req.body;
-            console.log(email);
-            User.findOne({ 'email' :  email }, 
-                function(err, user) {
-                    // In case of any error, return using the done method
-                    if (err) {
-                        res.send({valid: false});
-                    }
-                    // Username does not exist, log the error and redirect back
-                    if (user){
-                        res.send({valid: false});
-                    } else  {
-                        res.send({valid: false});  // redirect back to login page
-                    	res.send(req.user);
-                    }
-                    // User and password both match, return user from done method
-                    // which will be treated like success
+            var newUser = new User();
+
+			// set the user's local credentials
+			newUser.password = createHash(password);
+			newUser.email = body.email;
+			newUser.firstName = body.firstName;
+			newUser.lastName = body.lastName;
+			newUser.age = body.age;
+			newUser.gender = body.gender;
+			newUser.race = body.race;
+			newUser.city = body.city;
+			newUser.state = body.state;
+			newUser.occupation = body.occupation;
+
+			// save the user
+			newUser.save(function(err) {
+				if (err){
+					console.log('Error in Saving user: '+err);  
+					throw err;  
 				}
-			);
+				console.log('User Registration succesful');    
+				return newUser;
+			}
 		}
 	);
+
+    // Generates hash using bCrypt
+    var createHash = function(password){
+		var bCrypt = require('bcrypt-nodejs');
+        return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
+    }
 
 	/* Handle Registration POST */
 	router.get('/followup', function(req, res) {
