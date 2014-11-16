@@ -65,8 +65,12 @@ $(document).ready(function() {
 		var d = {}
 		for (i=0;i<data.length;i++) {
 			temp = data[i];
-			console.log(selector);
-			console.log(temp[selector]);
+			temp2 = temp[selector]);
+			if (temp2 in d) {
+				d[temp2] += 1;
+			} else {
+				d[temp2] = 1;
+			}
 		}
 		console.log(d);
 	    $('#data-container').highcharts({
