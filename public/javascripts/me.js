@@ -63,16 +63,24 @@ $(document).ready(function() {
 		console.log('plotting');
 		console.log(data);
 		var d = {}
+		var l = []
 		for (i=0;i<data.length;i++) {
 			temp = data[i];
 			temp2 = temp[selector];
-			if (temp2 in d) {
-				d[temp2] += 1;
-			} else {
-				d[temp2] = 1;
+			if (temp2 != undefined) {
+				if (temp2 in d) {
+					d[temp2] += 1;
+				} else {
+					d[temp2] = 1;
+				}
 			}
 		}
 		console.log(d);
+		for (var key in d) {
+			temp = [key, d[key]];
+			l.push(temp);
+		}
+		console.log(l);
 	    $('#data-container').highcharts({
 	        chart: {
 	            plotBackgroundColor: null,
