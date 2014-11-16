@@ -1,0 +1,36 @@
+{
+    "name": "starter-node-angular",
+    "version": "1.0.0",
+    "dependencies": {
+        "bootstrap": "latest",
+        "font-awesome": "latest",
+        "animate.css": "latest",
+        "angular": "latest",
+        "angular-route": "latest",
+	"bootstrap-material-design": "~0.1.5",
+	"ionic-contrib-tinder-cards":"*"   
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

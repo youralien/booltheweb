@@ -18,15 +18,17 @@ block content
           a(href='/home') Let's Bool! 
       ul.nav.navbar-nav.navbar-right
         li
-          a(href='#about')#username #{user.firstName}
+          a(href='#about') #{user.firstName}
         li
           a(href='/signout') Logout 
 
     //- div#question-container
   ion-pane(ng-controller='CardsCtrl')
     td-cards
-      td-card(ng-repeat='card in cards', on-destroy='cardDestroyed($index)', on-swipe-left='cardSwipedLeft($index)', on-swipe-right='cardSwipedRight($index)', on-partial-swipe='cardPartialSwipe(amt)', ng-controller='CardCtrl').card-{{card.index}}
-        .image
+      td-card(ng-repeat='card in cards',on-destroy='cardDestroyed($index)',on-swipe-left='cardSwipedLeft($index)',on-swipe-right='cardSwipedRight($index)',on-partial-swipe='cardPartialSwipe(amt)',ng-controller='CardCtrl').card-{{card.index}}
+        .list-group-item
+          .row-content
+            h4.list-group-item-heading {{card.question}}
+            p.list-group-item-text {{card.optionA}} or {{card.optionB}}
           .yes-text(ng-style='leftTextOpacity') LIKE
-          img(ng-src='{{card.image}}')
           .no-text(ng-style='rightTextOpacity') NOPE
