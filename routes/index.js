@@ -103,6 +103,7 @@ module.exports = function(passport){
 					return newUser;
 				}
 			);
+			res.send(newUser);
 			return newUser;
 		}
 	);
