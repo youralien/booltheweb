@@ -60,6 +60,9 @@ $(document).ready(function() {
 
 	function plot(data, selector) {
 		selector = selector.toLowerCase();
+		if (selector == "location") {
+			selector = "state";
+		}
 		console.log('plotting');
 		console.log(data);
 		var d = {}
