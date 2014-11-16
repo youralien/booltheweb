@@ -102,6 +102,7 @@ module.exports = function(passport){
 					console.log('User Registration succesful');
 					return newUser;
 				}
+				return newUser;
 			);
 		}
 	);
