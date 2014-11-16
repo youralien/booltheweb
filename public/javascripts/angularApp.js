@@ -42,13 +42,23 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.tinderCards'])
   }
 })
 
-.controller('CardCtrl', function($scope, TDCardDelegate) {
+.controller('CardCtrl', function($scope, $http) {
   $scope.cardSwipedLeft = function(index) {
     console.log('LEFT SWIPE');
     $scope.addCard();
+    // add an answer for a challenge
+    $http.put(
+      '/questions/'+ $scope.cards[index],
+      {"answer":'A'}
+    )
   };
   $scope.cardSwipedRight = function(index) {
     console.log('RIGHT SWIPE');
     $scope.addCard();
+    // add an answer for a challenge
+    $http.put(
+      '/questions/'+ $scope.cards[index],
+      {"answer":'B'}
+    )
   };
 });
