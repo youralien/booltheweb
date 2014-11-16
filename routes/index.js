@@ -52,7 +52,6 @@ module.exports = function(passport){
 	router.post('/mobilesignup', 
 		passport.authenticate('signup'), 
 		function(req, res) {
-			console.log(req.user);
             res.send(req.user);
 		}
 	);
@@ -66,8 +65,20 @@ module.exports = function(passport){
 	/* Handle Registration POST */
 	router.post('/followup',  
 		function(req, res) {
+			var User = require('../models/user');
+			var thing = req.body;
+			console.log(thing.age);
+			/*
 			age = req.params('age');
+			gender = req.params('gender');
+			race = req.params('race');
+			city = req.params('city');
+			state = req.params('state');
+			occupation = req.params('occupation');
 			console.log(age);
+			console.log(gender);
+			console.log(race);
+			*/
             res.send(req.user);
 		}
 	);
@@ -84,28 +95,17 @@ module.exports = function(passport){
 	});
 
 	/* GET Ask [Questions]*/
-	router.get('/ask', function(req, res) {
+	router.get('/ask', isAuthenticated, function(req, res) {
 		res.render('ask', {user:req.user});
 	});
 
 	/* POST Ask [Questions]*/
-	router.post('/ask', function(req, res) {
+	router.post('/ask', isAuthenticated, function(req, res) {
 		question.addQuestion(req, res)
 		res.redirect('/home');
 	});
 
 	router.get('/deleteall', question.deleteAll);
-
-	/* GET Ask [Questions]*/
-	router.get('/ask', function(req, res) {
-		res.render('ask', {user:req.user});
-	});
-
-	/* POST Ask [Questions]*/
-	router.post('/ask', function(req, res) {
-		question.addQuestion(req, res)
-		res.redirect('/home');
-	});
 
 	router.get('/questions', question.findAll);
 	router.get('/questions/last/:time', question.findAllFromTime);
