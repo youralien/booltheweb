@@ -28,13 +28,39 @@ module.exports = function(passport){
 	}));
 
 	router.post('/mobilelogin',
-		passport.authenticate('login'),
 		function(req, res) { 
+			var bCrypt = require('bcrypt-nodejs');
+			var User = require('../models/user');
 			// If this function gets called, authentication was successful.
 			// `req.user` contains the authenticated user.
-            res.send(req.user);
-		}
+            // check in mongo if a user with username exists or not
+            var email = req.body.email;
+            var password = req.body.password;
+            console.log(email);
+            User.findOne({ 'email' :  email }, 
+                function(err, user) {
+                    // In case of any error, return using the done method
+                    if (err)
+                        return done(err);
+                    // Username does not exist, log the error and redirect back
+                    if (!user){
+                        res.send({valid: false});           
+                    } else if (!isValidPassword(user, password)) {
+                        console.log('Invalid Password');
+                        res.send({valid: false});  // redirect back to login page
+                    }
+                    // User and password both match, return user from done method
+                    // which will be treated like success
+                    res.send(req.user);
+				}
+			);
+        }
 	);
+
+	var isValidPassword = function(user, password){
+		var bCrypt = require('bcrypt-nodejs');
+        return bCrypt.compareSync(password, user.password);
+    }
 
 	/* GET Registration Page */
 	router.get('/signup', function(req, res){
