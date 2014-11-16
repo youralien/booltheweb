@@ -88,6 +88,78 @@ h1.error-message{
 ul.user-details{
     list-style: none;
 }
+
+/* dat nav */
+/* Red */
+$bgDefault      : #3498DB;
+$bgHighlight    : #c0392b;
+$colDefault     : #ecf0f1;
+$colHover       : #ffbbbc; 
+/* Green * /
+$bgDefault      : #2ecc71;
+$bgHighlight    : #27ae60;
+$colDefault     : #ecf0f1;
+$colHover       : #d1ffed; /*/
+/* Purple * /
+$bgDefault      : #9b59b6;
+$bgHighlight    : #8e44ad;
+$colDefault     : #ecf0f1;
+$colHover       : #ecdbff; /*/
+/* Orange * /
+$bgDefault      : #e67e22;
+$bgHighlight    : #d35400;
+$colDefault     : #ecf0f1;
+$colHover       : #ffe6d1; /*/
+
+
+/* --- Style --- */
+.navbar-default {
+    background-color: $bgDefault;
+    border-color: $bgHighlight;
+    .navbar-brand {
+        color: $colDefault;
+        &:hover, &:focus {
+            color: $colHover; }}
+    .navbar-nav {
+        > li {
+            > a {
+                color: $colDefault;
+                &:hover, &:focus {
+                    color: $colHover;   }}}
+        .active {
+            > a, > a:hover, > a:focus {
+                color: $colHover;
+                background-color: $bgHighlight; }}
+        .open {
+            > a, > a:hover, > a:focus {
+                color: $colHover;
+                background-color: $bgHighlight;
+                .caret {
+                    border-top-color: $colHover;
+                    border-bottom-color: $colHover; }}}
+        > .dropdown {
+            > a {
+                .caret {
+                    border-top-color: $colDefault;
+                    border-bottom-color: $colDefault; }
+                &:hover, &:focus {
+                    .caret {
+                        border-top-color: $colHover;
+                        border-bottom-color: $colHover; }}}}}
+    .navbar-toggle {
+        border-color: $bgHighlight;
+        &:hover, &:focus {
+            background-color: $bgHighlight; }
+        .icon-bar {
+            background-color: $colDefault; }}}
+@media (max-width: 767px) {
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color: $colDefault;
+        &:hover, &:focus {
+            color: $colHover;
+            background-color: $bgHighlight; }}
+}
+
 .navbar-brand
 {
     position: absolute;
@@ -102,6 +174,13 @@ ul.user-details{
     width: 70vw;
     height: 70vh;
 }
+@font-face {
+  
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Montserrat-Bold'), url(/css/fonts/Montserrat-Bold.woff) format('woff');
+}
 .question {
     position: relative;
     width: 100%;
@@ -112,6 +191,9 @@ ul.user-details{
     border: 2px solid black;
     border-radius: 10px;
     display: none;
+    background-color: #9B59B6;
+    color: #FFFFFF;
+    font: 'Montserrat-Bold'; 
     padding: 10%;
     font-size: 2em;
 }
@@ -147,6 +229,9 @@ ul.user-details{
   bottom: 0;
   border-top: 1px solid black;
   border-right: 1px solid black;
+  background-color: #2ECC71;
+  color: #FFFFFF;
+  font: 'Montserrat-Bold';
 }
 .option-b {
   width: 50%;
@@ -157,6 +242,9 @@ ul.user-details{
   bottom: 0;
   border-top: 1px solid black;
   border-left: 1px solid black;
+  background-color: #e74c3c;
+  color: #FFFFFF;
+  font: 'Montserrat-Bold'; 
 }
 .ask-form{
     padding: 10%;
