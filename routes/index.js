@@ -91,6 +91,7 @@ module.exports = function(passport){
 			newUser.city = body.city;
 			newUser.state = body.state;
 			newUser.occupation = body.occupation;
+            console.log('yay');
 
 			// save the user
 			newUser.save(function(err) {
@@ -98,9 +99,10 @@ module.exports = function(passport){
 						console.log('Error in Saving user: '+err);  
 						throw err;  
 					}
-					console.log('User Registration succesful');    
+					console.log('User Registration succesful');
 					return newUser;
 				}
+            console.log('yay');
 			);
 		}
 	);
