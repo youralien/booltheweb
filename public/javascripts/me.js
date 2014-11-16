@@ -59,8 +59,15 @@ $(document).ready(function() {
 	}
 
 	function plot(data, selector) {
+		selector = selector.toLowerCase();
 		console.log('plotting');
 		console.log(data);
+		var d = {}
+		for (i=0;i<data.length;i++) {
+			temp = data[i];
+			console.log(temp[selector]);
+		}
+		console.log(d);
 	    $('#data-container').highcharts({
 	        chart: {
 	            plotBackgroundColor: null,
