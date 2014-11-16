@@ -74,11 +74,9 @@ module.exports = function(passport){
 	/* Handle Registration POST for mobile */
 	router.post('/mobilesignup', 
 		function(req, res) {
-			console.log('yay');
 			var User = require('../models/user');
             var body = req.body;
             var newUser = new User();
-            console.log(body);
 
 			// set the user's local credentials
 			newUser.password = createHash(body.password);
@@ -91,7 +89,6 @@ module.exports = function(passport){
 			newUser.city = body.city;
 			newUser.state = body.state;
 			newUser.occupation = body.occupation;
-            console.log('yay');
 
 			// save the user
 			newUser.save(function(err) {
@@ -158,7 +155,7 @@ module.exports = function(passport){
 	});
 
 	/* POST Ask [Questions]*/
-	router.post('/ask', isAuthenticated, function(req, res) {
+	router.post('/ask', function(req, res) {
 		question.addQuestion(req, res)
 		res.redirect('/home');
 	});
