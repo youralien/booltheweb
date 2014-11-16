@@ -210,6 +210,7 @@ module.exports = function(passport){
 	});
 
 	router.get('/me', isAuthenticated, function(req, res) {
+		console.log(req.user._id);
 		res.render('me', {user:req.user})
 	});
 

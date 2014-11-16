@@ -7,7 +7,14 @@ $(document).ready(function() {
 	var user_id = $("#user-id").text();
 	console.log(user_id);
 	getUserQuestions(user_id);
-	testGetUserQuestions();
+	//testGetUserQuestions();
+
+	function getUserQuestions(id) {
+		$.get( "/questions/user/"+id, function(data) {
+				parseData(data);
+			}
+		);	
+	}
 
 	function parseData(data) {
 		for (i=0;i<data.length;i++) {
@@ -19,22 +26,6 @@ $(document).ready(function() {
 			console.log(id);
 			getQuestionData(id);
 		});
-	}
-
-	function displaySelectors(data) {
-		for (i=0;i<criteria.length;i++) {
-			$("#selection-bar").append("<div class='data-selector'>"+criteria[i]+"</div>");
-		}
-		$(".data-selector").click(function() {
-			do_plot($(this).text().toLowerCase());
-		});
-	}
-
-	function getUserQuestions(id) {
-		$.get( "/questions/user/"+id, function(data) {
-				parseData(data);
-			}
-		);	
 	}
 
 	function getQuestionData(questionid) {
@@ -56,6 +47,15 @@ $(document).ready(function() {
 				}
 			}
 		);
+	}
+
+	function displaySelectors(data) {
+		for (i=0;i<criteria.length;i++) {
+			$("#selection-bar").append("<div class='data-selector'>"+criteria[i]+"</div>");
+		}
+		$(".data-selector").click(function() {
+			do_plot($(this).text().toLowerCase());
+		});
 	}
 
 	function do_plot(selector) {

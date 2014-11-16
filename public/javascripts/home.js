@@ -20,7 +20,7 @@ $(document).ready(function() {
 		$("#question-container").children().first().animate({
 			top: "0"
 		}, 500);
-		addDraggable($("#question-container").children().first());
+		//addDraggable($("#question-container").children().first());
 	}
 
 	document.onkeydown = checkKey;
