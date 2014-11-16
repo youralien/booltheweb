@@ -32,6 +32,16 @@ exports.findAll = function(req, res) {
     });
 };
 
+exports.findAllWorking = function(req, res) {
+    db.collection('questions', function(err, collection) {
+            collection.find({answersA:{$elemMatch:req.user._id}}).sort( { timestamp : -1 } ).limit(resultsLimit).toArray(function(err, items) {
+                console.log(items);
+                console.log(items.length);
+                res.send(items);
+            });
+    });
+};
+
 exports.findAllExperiment = function(req, res) {
     db.collection('questions', function(err, collection) {
         try {
@@ -91,6 +101,8 @@ exports.addQuestion = function(req, res) {
         console.log('is mobile, posts id by itself');
     }
     question["timestamp"] = new Date().getTime();
+    question["answersA"] = [];
+    question["answersB"] = [];
     console.log(JSON.stringify(question));
     db.collection('questions', function(err, collection) {
         collection.insert(question, {safe:true}, function(err, result) {
