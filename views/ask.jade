@@ -8,7 +8,8 @@ block content
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      a.navbar-brand(href='/home') Bool
+      a.navbar-brand(href='/home')
+        img(src='https://files.slack.com/files-pri/T02C9PBK6-F030LSQ24/full.png')
     div.navbar-collapse.collapse
       ul.nav.navbar-nav.navbar-left
         li
@@ -17,7 +18,7 @@ block content
           a(href='/home') Let's Bool! 
       ul.nav.navbar-nav.navbar-right
         li
-          a(href='#about')#username #{user.firstName}
+          a(href='/me')#username #{user.firstName}
         li
           a(href='/signout') Logout 
 
