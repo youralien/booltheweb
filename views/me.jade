@@ -1,8 +1,8 @@
 extends layout
 
 block content
-  p(style='display:none;')#{user._id}
   //- naviation bar
+  p(style='display:none')#user-id #{user._id}
   nav.navbar.navbar-default(role='navigation')
     div.navbar-header
       button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
