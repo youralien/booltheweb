@@ -45,13 +45,16 @@ module.exports = function(passport){
                         return done(err);
                     // Username does not exist, log the error and redirect back
                     if (!user){
-                        res.send({valid: false});           
+                        res.send({valid: false});
+                        return;    
                     } else if (!isValidPassword(user, password)) {
                         res.send({valid: false});  // redirect back to login page
+                        return;
                     }
                     // User and password both match, return user from done method
                     // which will be treated like success
                     res.send(req.user);
+                    return;
 				}
 			);
         }

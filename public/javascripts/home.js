@@ -9,7 +9,6 @@ $(document).ready(function() {
 	function getData() {
 		$.getJSON( "/questions", function( data ) {
 			parseData(data);
-			putAnswer(data[0]._id, "A");
 		});
 	}
 
@@ -18,7 +17,6 @@ $(document).ready(function() {
 			$("#question-container").append("<div id='question'>"+data[i].question+"</div>");
 		}
 		lastEntry=data[data.length-1];
-		console.log(lastEntry);
 	}
 
 	function putAnswer(id, aorb) {
