@@ -6,8 +6,8 @@ $(document).ready(function() {
 	var user_data = [];
 	var user_id = $("#user-id").text();
 	console.log(user_id);
-	//getUserQuestions(user_id);
-	testGetUserQuestions();
+	getUserQuestions(user_id);
+	//testGetUserQuestions();
 
 	function getUserQuestions(user_id) {
 		$.get( "/questions/user/"+user_id, function(data) {
