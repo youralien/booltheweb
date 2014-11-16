@@ -39,7 +39,6 @@ module.exports = function(passport){
             console.log(email);
             User.findOne({ 'email' :  email }, 
                 function(err, user) {
-                	console.log(user);
                     // In case of any error, return using the done method
                     if (err)
                         return done(err);
@@ -53,8 +52,7 @@ module.exports = function(passport){
                     }
                     // User and password both match, return user from done method
                     // which will be treated like success
-                    res.send(req.user);
-                    return;
+                    res.send(user);
 				}
 			);
         }
