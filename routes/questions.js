@@ -89,17 +89,23 @@ exports.deleteQuestion = function(req, res) {
 }
 
 exports.addAnswer = function(req, res) {
+    console.log("putting");
     var id = req.params.id;
+    console.log(id);
     try {
         var userid = req.user._id;
     } catch(err) {
         var userid = req.body.userid; // for mobile
     }
+    console.log(userid);
     var answer = req.body.answer;
+    console.log(answer);
     db.collection('questions', function(err, collection) {
         if (answer=="A") {
+            console.log('a');
             collection.update({ '_id': new BSON.ObjectID(id) }, {$push:{answersA:userid}});
         } else {
+            console.log('b');
             collection.update({ '_id': new BSON.ObjectID(id) }, {$push:{answersB:userid}});
         }
     });

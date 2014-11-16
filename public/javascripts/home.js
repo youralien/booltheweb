@@ -61,18 +61,14 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.tinderCards'])
 $(document).ready(function() {
 	var lastEntry;
 
-	testMobileSignup('runnersaw', 'ranger13', 'Sawyer', 'Vaughan', 'sawyer.vaughan@students.olin.edu');
-	testMobileSignup('runnersaw4', 'ranger13', 'Sawyer', 'Vaughan', 'sawyer.vaughan@students.olin.edu');
-
-
 	getData();
 	//addQuestion("Does JWei have swag?", "Yes", "No");
 	//deleteAll();
+	testMobileLogin("sawyer.vaughan@students.olin.edu", "ranger");
 
 	function getData() {
 		$.getJSON( "/questions", function( data ) {
 			parseData(data);
-			putAnswer(data[0]._id, "A");
 		});
 	}
 
@@ -81,7 +77,6 @@ $(document).ready(function() {
 			$("#question-container").append("<div id='question'>"+data[i].question+"</div>");
 		}
 		lastEntry=data[data.length-1];
-		console.log(lastEntry);
 	}
 
 	function putAnswer(id, aorb) {
@@ -107,19 +102,18 @@ $(document).ready(function() {
 		$.get( "/deleteall");
 	}
 
-	function testMobileLogin(username, password) {
+	function testMobileLogin(email, password) {
 		$.post( "/mobilelogin", {
-				username: username,
+				email: email,
 				password: password
 			}
 		);		
 	}
 
-	function testMobileSignup(username, password, firstName, lastName, email) {
+	function testMobileSignup(email, password, firstName, lastName) {
 		$.post( "/mobilesignup", {
-				username: username,
-				password: password,
                 email: email,
+				password: password,
                 firstName: firstName,
                 lastName: lastName
 			}
