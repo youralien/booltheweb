@@ -22,11 +22,4 @@ block content
         li
           a(href='/signout') Logout 
 
-    //- div#question-container
-  ion-pane(ng-controller='CardsCtrl')
-    td-cards
-      td-card(ng-repeat='card in cards', on-destroy='cardDestroyed($index)', on-swipe-left='cardSwipedLeft($index)', on-swipe-right='cardSwipedRight($index)', on-partial-swipe='cardPartialSwipe(amt)', ng-controller='CardCtrl').card-{{card.index}}
-        .image
-          .yes-text(ng-style='leftTextOpacity') LIKE
-          img(ng-src='{{card.image}}')
-          .no-text(ng-style='rightTextOpacity') NOPE
+    div#question-container

@@ -1,5 +1,6 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  overflow: hidden;
 }
 
 a {
@@ -97,11 +98,36 @@ ul.user-details{
     margin-left: 25vw;
     margin-top: 50px;
     width: 50vw;
-    background-color: red;
+    height: 80vh;
 }
 .question {
     position: relative;
     width: 100%;
+    height: 100%;
+    left: 0;
+    top: 100vh;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 10px;
+    display: none;
+}
+.option-a {
+  width: 50%;
+  position: absolute;
+  left: 0;
+  height: 20%;
+  bottom: 0;
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+}
+.option-b {
+  width: 50%;
+  position: absolute;
+  right: 0;
+  height: 20%;
+  bottom: 0;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
 }
 .ask-form{
     padding: 10%;
@@ -175,3 +201,4 @@ td-card img {
   transition: 0.2s opacity linear;
   opacity: 0;
 }
+
