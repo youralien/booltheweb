@@ -166,7 +166,7 @@ module.exports = function(passport){
 	});
 
 	router.get('/deleteall', question.deleteAll);
-
+	router.get('/questions/user/:userid', question.findQuestionsByUser);
 	router.get('/questions', question.findAll);
 	router.get('/questions/last/:time', question.findAllFromTime);
 	router.get('/questions/:id', question.findById);

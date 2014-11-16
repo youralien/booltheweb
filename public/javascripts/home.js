@@ -5,6 +5,7 @@ $(document).ready(function() {
 	//addQuestion("Does JWei have swag?", "Yes", "No");
 	//deleteAll();
 	testMobileLogin("sawyer.vaughan@students.olin.edu", "ranger");
+	testGetUserQuestions();
 
 	function getData() {
 		$.getJSON( "/questions", function( data ) {
@@ -81,5 +82,12 @@ $(document).ready(function() {
 
 	function deleteAll() {
 		$.get( "/deleteall");
+	}
+
+	function testGetUserQuestions() {
+		$.get( "/questions/user/54670c66de802fa05f003992", function(data) {
+				console.log(data);
+			}
+		);	
 	}
 })

@@ -51,6 +51,15 @@ exports.findById = function(req, res) {
     });
 };
 
+exports.findQuestionsByUser = function(req, res) {
+    var id = req.params.userid;
+    db.collection('questions', function(err, collection) {
+        collection.find({'poster':new BSON.ObjectID(id)}).toArray(function(err, items) {
+            res.send(items);
+        });
+    });
+};
+
 exports.addQuestion = function(req, res) {
     var question = req.body;
     question["poster"] = req.user._id;
