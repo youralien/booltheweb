@@ -1,7 +1,6 @@
 extends layout
 
 block content
-  script(src='/javascripts/home.js')
   //- naviation bar
   nav.navbar.navbar-default(role='navigation')
     div.navbar-header
@@ -22,4 +21,11 @@ block content
         li
           a(href='/signout') Logout 
 
-    div#question-container
+  div#my-questions-container
+  div#data-container
+  div#selection-bar
+
+  script(src="http://code.highcharts.com/highcharts.js")
+  script(src="http://code.highcharts.com/modules/exporting.js")
+  script(src='javascripts/me.js')
+  script(src="http://d3js.org/d3.v3.min.js", charset="utf-8")

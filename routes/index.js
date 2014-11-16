@@ -65,11 +65,81 @@ module.exports = function(passport){
 	});
 
 	/* Handle Registration POST */
-	router.post('/signup', passport.authenticate('signup', {
-		successRedirect: '/followup',
-		failureRedirect: '/signup',
-		failureFlash : true  
-	}));
+	router.post('/signup', passport.authenticate('signup'), function(req, res) {
+		var User = require('../models/user');
+        var body = req.body;
+        User.findOne({ 'email' :  body.email }, // find users with this email
+                function(err, user) {
+                    // In case of any error, return
+                    if (err)
+                        return done(err);
+                    // User and password both match, return user
+					user.age = body.age;
+					user.gender = body.gender;
+					user.race = body.race;
+					user.city = body.city;
+					user.state = body.state;
+					user.occupation = body.occupation;
+
+					// save the user
+					user.save(function(err) {
+							if (err) {
+								console.log('Error in Saving user: '+err);  
+								throw err;  
+							}
+							console.log('User Registration succesful');
+							return user;
+						}
+					);
+                    res.redirect('/home');
+				}
+			);
+/*
+		// set the user's local credentials
+		newUser.password = createHash(body.password);
+		newUser.email = body.email;
+		newUser.firstName = body.firstName;
+		newUser.lastName = body.lastName;
+		newUser.age = body.age;
+		newUser.gender = body.gender;
+		newUser.race = body.race;
+		newUser.city = body.city;
+		newUser.state = body.state;
+		newUser.occupation = body.occupation;
+
+		// save the user
+		newUser.save(function(err) {
+				if (err) {
+					console.log('Error in Saving user: '+err);  
+					throw err;  
+				}
+				console.log('User Registration succesful');
+				return newUser;
+			}
+		);
+		res.send(newUser);
+		return newUser;
+		*/
+	});
+
+	/* Handle Registration POST */
+	router.post('/followup',  
+		function(req, res) {
+			var User = require('../models/user');
+			var body = req.body;
+			age = body.age;
+			gender = body.gender;
+			race = body.race;
+			city = body.city;
+			state = body.state;
+			occupation = body.occupation;
+			console.log(age);
+			console.log(gender);
+			console.log(race);
+			console.log(req.user);
+            res.redirect('/home');
+		}
+	);
 
 	/* Handle Registration POST for mobile */
 	router.post('/mobilesignup', 
@@ -117,27 +187,6 @@ module.exports = function(passport){
 		}
 	);
 
-	/* Handle Registration POST */
-	router.post('/followup',  
-		function(req, res) {
-			var User = require('../models/user');
-			var thing = req.body;
-			console.log(thing.age);
-			/*
-			age = req.params('age');
-			gender = req.params('gender');
-			race = req.params('race');
-			city = req.params('city');
-			state = req.params('state');
-			occupation = req.params('occupation');
-			console.log(age);
-			console.log(gender);
-			console.log(race);
-			*/
-            res.redirect('/home')
-		}
-	);
-
 	/* GET Home Page */
 	router.get('/home', isAuthenticated, function(req, res){
 		res.render('home', { user: req.user });
@@ -158,6 +207,29 @@ module.exports = function(passport){
 	router.post('/ask', function(req, res) {
 		question.addQuestion(req, res)
 		res.redirect('/home');
+	});
+
+	router.get('/me', isAuthenticated, function(req, res) {
+		res.render('me', {user:req.user})
+	});
+
+	router.get('/user/:id', function(req, res) {
+    	var id = req.params.id;
+		var User = require('../models/user');
+	    User.findOne({ '_id' :  id }, // find users with this email
+            function(err, user) {
+                // In case of any error, return
+                if (err)
+                    return done(err);
+                // Username does not exist, tell app that this username is free to make an account
+                if (!user){
+                    res.send();
+                    return;    
+                } 
+                // User and password both match, return user
+                res.send(user);
+			}
+		);
 	});
 
 	router.get('/deleteall', question.deleteAll);

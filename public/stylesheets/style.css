@@ -201,4 +201,45 @@ td-card img {
   transition: 0.2s opacity linear;
   opacity: 0;
 }
-
+#my-questions-container {
+  width: 20vw;
+  float: left;
+  position: relative;
+  left: 0;
+  top: 0;
+  height: 100vh;
+}
+.my-question {
+  width: 100%;
+  float: left;
+  position: relative;
+  border: 1px solid black;
+  cursor: pointer;
+}
+#selection-bar {
+  width: 20vw;
+  position: relative;
+  height: 100vh;
+  float: left;
+  background-color: gray
+}
+.data-selector {
+  width: 100%;
+  float: left;
+  position: relative;
+  border: 1px solid black;
+  cursor: pointer;
+}
+#data-container {
+  width: 40vw;
+  float: right;
+  margin-right: 10vw;
+  position: relative;
+  height: 40vh;
+}
+#data-container2 {
+  width: 40vw;
+  float: right;
+  margin-right: 10vw;
+  position: relative;
+}

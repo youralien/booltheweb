@@ -25,44 +25,26 @@ db.open(function(err, db) {
 RESTFUL API HEREEE
 */
 exports.findAll = function(req, res) {
+    id = String(req.user._id);
     db.collection('questions', function(err, collection) {
-            collection.find().sort( { timestamp : -1 } ).limit(resultsLimit).toArray(function(err, items) {
-                res.send(items);
+            collection.find({poster:{$ne:id}}).sort( { timestamp : -1 } ).limit(resultsLimit).toArray(function(err, items) {
+                outputItems = []
+                for (i=0;i<items.length;i++) {
+                    add = true;
+                    if (items[i].answersA.indexOf(String(id)) > -1) {
+                        add = false;
+                    }
+                    if (items[i].answersB.indexOf(String(id)) > -1) {
+                        add = false;
+                    }
+                    if (add) {
+                        outputItems.push(items[i]);
+                    }
+                }
+                res.send(outputItems);
             });
     });
 };
-
-exports.findAllWorking = function(req, res) {
-    db.collection('questions', function(err, collection) {
-            collection.find({answersA:{$elemMatch:req.user._id}}).sort( { timestamp : -1 } ).limit(resultsLimit).toArray(function(err, items) {
-                console.log(items);
-                console.log(items.length);
-                res.send(items);
-            });
-    });
-};
-
-exports.findAllExperiment = function(req, res) {
-    db.collection('questions', function(err, collection) {
-        try {
-            collection.find({poster:{$ne:req.user._id}}).sort( { timestamp : -1 } ).limit(resultsLimit).toArray(function(err, items) {
-                console.log(items);
-                console.log(items.length);
-            });
-            collection.find({poster:{$ne:req.user._id}, answersA:{$elemMatch:req.user._id}}).sort( { timestamp : -1 } ).limit(resultsLimit).toArray(function(err, items) {
-                console.log(items);
-                console.log(items.length);
-            });
-            collection.find({poster:{$ne:req.user._id}, answersA:{$not:{$elemMatch:req.user._id}} , answersB:{$not:{$elemMatch:req.user._id}}}).sort( { timestamp : -1 } ).limit(resultsLimit).toArray(function(err, items) {
-                console.log(items);
-                console.log(items.length);
-            });
-        } catch(err) {
-            console.log(err);
-        }
-    });
-};
-
 
 exports.findAllFromTime = function(req, res) {
     var timestamp = req.params.time;
@@ -180,6 +162,36 @@ var populateDB = function() {
             "user3",
             "user5"
         ], 
+        poster: "54670c66de802fa05f003992", 
+        timestamp: new Date().getTime()
+    },
+    {
+        question: "Like hackathons?",
+        optionA: "yes",
+        optionB: "no",
+        answersA: [
+            "user1",
+            "user2"
+        ], 
+        answersB: [
+            "54670c66de802fa05f003992",
+            "user5"
+        ], 
+        poster: "user4", 
+        timestamp: new Date().getTime()
+    },
+    {
+        question: "Like hackathons?",
+        optionA: "yes",
+        optionB: "no",
+        answersA: [
+            "user1",
+            "user2"
+        ], 
+        answersB: [
+            "user3",
+            "user5"
+        ], 
         poster: "user4", 
         timestamp: new Date().getTime()
     },
@@ -188,7 +200,7 @@ var populateDB = function() {
         optionA: "cookies",
         optionB: "ice cream",
         answersA: [
-            "user1",
+            "54670c66de802fa05f003992",
             "user2"
         ], 
         answersB: [
