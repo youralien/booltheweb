@@ -54,7 +54,6 @@ exports.findAllExperiment = function(req, res) {
     });
 };
 
-*/
 
 exports.findAllFromTime = function(req, res) {
     var timestamp = req.params.time;
