@@ -5,8 +5,8 @@ $(document).ready(function() {
 
 	// test functions:
 	//addQuestion("Does JWei have swag?", "Yes", "No");
-	console.log("deleting");
-	deleteAll();
+	//console.log("deleting");
+	//deleteAll();
 	//testMobileLogin("sawyer.vaughan@students.olin.edu", "ranger");
 	//testGetUserQuestions();
 
