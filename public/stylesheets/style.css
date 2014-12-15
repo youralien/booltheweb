@@ -365,3 +365,17 @@ td-card img {
   margin-right: 10vw;
   position: relative;
 }
+.arrow-left {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+.arrow-right {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}

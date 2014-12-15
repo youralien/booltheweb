@@ -162,6 +162,7 @@ $(document).ready(function() {
 		for (i=0;i<data.length;i++) {
 			$("#question-container").append("<div id='"+data[i]._id+"' class='question'>"+data[i].question+"<div class='option-a'>"+data[i].optionA+"</div><div class='option-b'>"+data[i].optionB+"</div></div>");
 		}
+		addArrows();
 		lastEntry=data[data.length-1];
 	}
 
@@ -246,5 +247,11 @@ $(document).ready(function() {
 				console.log(data);
 			}
 		);	
+	}
+
+	function addArrows() {
+		$(".arrow").remove();
+		$(".option-a").append('<img class="arrow-left" src="static/arrow-left.png">');
+		$(".option-b").append('<img class="arrow-right" src="static/arrow-right.png">');
 	}
 })
